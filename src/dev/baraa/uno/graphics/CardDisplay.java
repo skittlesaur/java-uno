@@ -20,7 +20,7 @@ public class CardDisplay extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        BufferedImage cardImage = ImageProvider.getCard(card.getValue() + "" + card.getColor());
+        BufferedImage cardImage = ImageProvider.getCard(card.getCardName());
         g.drawImage(cardImage, 0, 0, getWidth(), getHeight(), null);
     }
 }

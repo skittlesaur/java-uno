@@ -56,5 +56,7 @@ public class Card {
         return color;
     }
 
-
+    public String getCardName() {
+        return value + "" + color;
+    }
 }
