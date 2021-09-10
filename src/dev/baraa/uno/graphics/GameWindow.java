@@ -24,8 +24,18 @@ public class GameWindow extends JFrame {
         setLocationRelativeTo(null);
         //setUndecorated(true);
 
-        Cards cards = new Cards(Uno.getPlayerCards(0), true);
-        add(cards, BorderLayout.SOUTH);
+        Cards player0 = new Cards(Uno.getPlayerCards(0), true);
+        add(player0, BorderLayout.SOUTH);
+
+        Cards player1 = new Cards(Uno.getPlayerCards(1), false);
+        player1.setRotation(90);
+        add(player1, BorderLayout.WEST);
+
+        Cards player2 = new Cards(Uno.getPlayerCards(2), true);
+        add(player2, BorderLayout.NORTH);
+
+        Cards player3 = new Cards(Uno.getPlayerCards(0), false);
+        add(player3, BorderLayout.EAST);
 
         /*
          * Initializes the previous size and previous location.
