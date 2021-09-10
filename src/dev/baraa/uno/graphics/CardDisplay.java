@@ -9,9 +9,11 @@ import java.awt.image.BufferedImage;
 public class CardDisplay extends JPanel {
 
     private Card card;
+    private boolean visible;
 
-    public CardDisplay(Card card) {
+    public CardDisplay(Card card, boolean visible) {
         this.card = card;
+        this.visible = visible;
         setOpaque(false);
         setPreferredSize(new Dimension((int) (165 * 0.6), (int) (255 * 0.6)));
         setLayout(new BorderLayout());
@@ -20,7 +22,8 @@ public class CardDisplay extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        BufferedImage cardImage = ImageProvider.getCard(card.getCardName());
+        String cardName = visible ? card.getCardName() : "Default";
+        BufferedImage cardImage = ImageProvider.getCard(cardName);
         g.drawImage(cardImage, 0, 0, getWidth(), getHeight(), null);
     }
 }

@@ -24,7 +24,7 @@ public class GameWindow extends JFrame {
         setLocationRelativeTo(null);
         //setUndecorated(true);
 
-        Cards cards = new Cards(Uno.getPlayerCards(0));
+        Cards cards = new Cards(Uno.getPlayerCards(0), true);
         add(cards, BorderLayout.SOUTH);
 
         /*
