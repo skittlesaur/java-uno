@@ -10,7 +10,7 @@ public class Uno {
     }
 
     private static void initialize() {
-
+        GameWindow.initialize();
     }
 
     private static void run() {

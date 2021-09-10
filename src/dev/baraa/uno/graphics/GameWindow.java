@@ -35,14 +35,22 @@ public class GameWindow extends JFrame {
     }
 
     /**
-     * Creates the game window object if not created.
-     * In case something goes wrong. this method will make sure it displays the window just once.
+     * Creates the game window object.
+     */
+    public static void initialize() {
+        if (gameWindow != null)
+            return;
+
+        gameWindow = new GameWindow();
+    }
+
+    /**
+     * Displays the game window.
      */
     public static void start() {
         if (gameWindow != null)
             return;
 
-        gameWindow = new GameWindow();
         gameWindow.setVisible(true);
     }
 }
