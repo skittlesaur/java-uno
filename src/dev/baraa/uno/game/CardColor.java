@@ -3,7 +3,7 @@ package dev.baraa.uno.game;
 import java.util.Random;
 
 public enum CardColor {
-    RED, GREEN, BLUE, YELLOW, UNIVERSAL;
+    YELLOW, RED, GREEN, BLUE, UNIVERSAL;
 
     /**
      * @return a random card color

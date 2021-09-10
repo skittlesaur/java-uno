@@ -1,5 +1,6 @@
 package dev.baraa.uno.graphics;
 
+import dev.baraa.uno.Uno;
 import dev.baraa.uno.exceptions.graphics.GameWindowHasBeenInitializedException;
 import dev.baraa.uno.exceptions.graphics.GameWindowNotInitializedException;
 
@@ -21,7 +22,10 @@ public class GameWindow extends JFrame {
     private GameWindow() {
         setMinimumSize(new Dimension(700, 600));
         setLocationRelativeTo(null);
-        setUndecorated(true);
+        //setUndecorated(true);
+
+        Cards cards = new Cards(Uno.getPlayerCards(0));
+        add(cards, BorderLayout.SOUTH);
 
         /*
          * Initializes the previous size and previous location.

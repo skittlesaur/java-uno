@@ -1,7 +1,7 @@
 package dev.baraa.uno.game;
 
 public enum SpecialMove {
-    PLUS_TWO, REVERSE, SKIP, CHANGE_COLOR, PLUS_FOUR;
+    PLUS_TWO, SKIP, REVERSE, CHANGE_COLOR, PLUS_FOUR;
 
     /**
      * Gets the special move of the card based on the card's value. Those values are fixed.
@@ -13,8 +13,8 @@ public enum SpecialMove {
 
         return switch (value) {
             case 10 -> PLUS_TWO;
-            case 11 -> REVERSE;
-            case 12 -> SKIP;
+            case 11 -> SKIP;
+            case 12 -> REVERSE;
             case 13 -> CHANGE_COLOR;
             case 14 -> PLUS_FOUR;
             default -> throw new IllegalStateException("Unexpected value: " + value);
