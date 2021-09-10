@@ -31,7 +31,7 @@ public class GameWindow extends JFrame {
          * Sets the JFrame to be maximized.
          * This is how the game is played by default. The player can modify this in the settings at any time.
          */
-        setExtendedState(MAXIMIZED_BOTH);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     /**
