@@ -48,7 +48,7 @@ public class GameWindow extends JFrame {
      * Displays the game window.
      */
     public static void start() {
-        if (gameWindow != null)
+        if (gameWindow == null)
             return;
 
         gameWindow.setVisible(true);
