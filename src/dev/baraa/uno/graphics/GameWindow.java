@@ -19,9 +19,9 @@ public class GameWindow extends JFrame {
 
 
     private GameWindow() {
-        setMinimumSize(new Dimension(600, 600));
+        setMinimumSize(new Dimension(700, 600));
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         /*
          * Initializes the previous size and previous location.
