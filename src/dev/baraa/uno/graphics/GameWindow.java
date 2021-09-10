@@ -1,5 +1,8 @@
 package dev.baraa.uno.graphics;
 
+import dev.baraa.uno.exceptions.graphics.GameWindowHasBeenInitializedException;
+import dev.baraa.uno.exceptions.graphics.GameWindowNotInitializedException;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -34,22 +37,27 @@ public class GameWindow extends JFrame {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
+
     /**
      * Creates the game window object.
+     *
+     * @throws GameWindowHasBeenInitializedException thrown when the game window has been already initialized before
      */
-    public static void initialize() {
+    public static void initialize() throws GameWindowHasBeenInitializedException {
         if (gameWindow != null)
-            return;
+            throw new GameWindowHasBeenInitializedException();
 
         gameWindow = new GameWindow();
     }
 
     /**
      * Displays the game window.
+     *
+     * @throws GameWindowNotInitializedException thrown when the game window has not been initialized.
      */
-    public static void start() {
+    public static void start() throws GameWindowNotInitializedException {
         if (gameWindow == null)
-            return;
+            throw new GameWindowNotInitializedException();
 
         gameWindow.setVisible(true);
     }
