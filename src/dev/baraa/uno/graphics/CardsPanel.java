@@ -5,32 +5,40 @@ import dev.baraa.uno.game.Card;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CardsPanel extends JPanel {
 
-    private ArrayList<CardImage> cardImages;
+    private List<Card> cards;
+    private boolean visible;
 
     public CardsPanel(List<Card> cards, boolean visible) {
-        cardImages = new ArrayList<>();
+        this.cards = cards;
+        this.visible = visible;
 
         setOpaque(false);
         setPreferredSize(new Dimension(200, 200));
         setBorder(BorderFactory.createEmptyBorder(10, 10, 20, 10));
 
-        for (Card card : cards) {
-            CardImage cardDisplay = new CardImage(card, visible);
-            add(cardDisplay);
-            cardImages.add(cardDisplay);
-        }
+        update();
     }
 
     public void setRotation(int rotation) {
-        for (CardImage card : cardImages)
-            card.setRotation(rotation);
+
     }
 
-    public ArrayList<CardImage> getCardImages() {
-        return cardImages;
+
+    public void update() {
+        removeAll();
+
+        for (Card card : cards) {
+            CardImage cardDisplay = new CardImage(card, visible);
+            add(cardDisplay);
+        }
+
+        repaint();
+        revalidate();
     }
 }

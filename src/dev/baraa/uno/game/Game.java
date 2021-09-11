@@ -1,5 +1,6 @@
 package dev.baraa.uno.game;
 
+import dev.baraa.uno.Uno;
 import dev.baraa.uno.exceptions.game.PlayerTurnException;
 import dev.baraa.uno.exceptions.game.IllegalCardException;
 
@@ -68,6 +69,19 @@ public class Game {
 
         player.removeCard(card);
         lastPlayedCard = card;
+
+        nextTurn();
+    }
+
+    private void nextTurn() {
+        turn = (turn + 1) % 4;
+        System.out.println(turn);
+        TablePlayer currentPlayer = gamePlayers[turn];
+
+        if (currentPlayer instanceof Bot) {
+            Card botCard = ((Bot) currentPlayer).play(lastPlayedCard);
+            Uno.play(currentPlayer, botCard);
+        }
     }
 
     /**

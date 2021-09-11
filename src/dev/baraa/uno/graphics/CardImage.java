@@ -26,13 +26,7 @@ public class CardImage extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (card.getHolder().isLocalPlayer()) {
-                    if (Uno.play(card.getHolder(), card)) {
-                        CardsPanel parent = ((CardsPanel) getParent());
-                        parent.getCardImages().remove(CardImage.this);
-                        parent.remove(CardImage.this);
-                        parent.repaint();
-                        parent.revalidate();
-                    }
+                    Uno.play(card.getHolder(), card);
                 }
             }
 

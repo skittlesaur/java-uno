@@ -37,15 +37,14 @@ public class Uno {
         return game.getPlayerCards(playerIndex);
     }
 
-    public static boolean play(TablePlayer player, Card card) {
+    public static void play(TablePlayer player, Card card) {
         try {
             game.play(player, card);
-            return true;
+            GameWindow.updateCards();
         } catch (PlayerTurnException e) {
             System.out.println(e.getMessage());
         } catch (IllegalCardException e) {
             System.out.println(e.getMessage());
         }
-        return false;
     }
 }
