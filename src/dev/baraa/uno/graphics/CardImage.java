@@ -64,7 +64,7 @@ public class CardImage extends JPanel {
 
         cardImage = rotateImageByDegrees(cardImage, angle);
 
-        graphics2D.drawImage(cardImage, 0, 0, getWidth(), getHeight(), this);
+        graphics2D.drawImage(cardImage, 0, 0, getWidth() - cardImage.getWidth() / getWidth() - cardImage.getHeight() / getHeight(), getHeight(), this);
     }
 
     public BufferedImage rotateImageByDegrees(BufferedImage img, double angle) {
