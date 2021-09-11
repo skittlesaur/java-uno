@@ -12,8 +12,8 @@ import java.awt.image.BufferedImage;
 
 public class CardImage extends JPanel {
 
-    private Card card;
-    private boolean visible;
+    private final Card card;
+    private final boolean visible;
     private int angle;
 
     public CardImage(Card card, boolean visible) {
@@ -79,7 +79,7 @@ public class CardImage extends JPanel {
         BufferedImage rotated = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = rotated.createGraphics();
         AffineTransform at = new AffineTransform();
-        at.translate((newWidth - w) / 2, (newHeight - h) / 2);
+        at.translate((newWidth - w) / 2d, (newHeight - h) / 2d);
 
         int x = w / 2;
         int y = h / 2;
