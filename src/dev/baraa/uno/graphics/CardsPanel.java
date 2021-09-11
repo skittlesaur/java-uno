@@ -46,10 +46,8 @@ public class CardsPanel extends JPanel {
             if (card.getHolder().isLocalPlayer()) {
                 if (card.getHolder().isPlayerTurn()
                         && card.isPlayable(Uno.getLastPlayedCard())) {
-                    System.out.println(1);
                     cardDisplay.setPlayable();
                 } else {
-                    System.out.println(2);
                     cardDisplay.setHidden();
                 }
             }
