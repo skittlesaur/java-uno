@@ -30,6 +30,14 @@ public class Card {
         }
     }
 
+    public boolean isPlayable(Card topCard) {
+        if (value == topCard.getValue()
+                || color == topCard.getColor()
+                || color == CardColor.UNIVERSAL)
+            return true;
+        return false;
+    }
+
     /**
      * Sets the card to be special.
      *

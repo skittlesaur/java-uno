@@ -38,11 +38,9 @@ public class Game {
         // turn = new Random().nextInt(4);
     }
 
-    private Card getCard() {
+    public Card getCard() {
         Random random = new Random();
-
         int randomValue = random.nextInt(14);
-
         return new Card(randomValue);
     }
 
@@ -80,7 +78,11 @@ public class Game {
 
         if (currentPlayer instanceof Bot) {
             Card botCard = ((Bot) currentPlayer).play(lastPlayedCard);
-            Uno.play(currentPlayer, botCard);
+
+            if (botCard != null && botCard.isPlayable(lastPlayedCard))
+                Uno.play(currentPlayer, botCard);
+            else
+                nextTurn();
         }
     }
 

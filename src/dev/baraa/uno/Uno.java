@@ -47,4 +47,8 @@ public class Uno {
             System.out.println(e.getMessage());
         }
     }
+
+    public static Card drawCard() {
+        return game.getCard();
+    }
 }

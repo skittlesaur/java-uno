@@ -1,5 +1,7 @@
 package dev.baraa.uno.game;
 
+import dev.baraa.uno.Uno;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -21,14 +23,19 @@ public class Bot extends TablePlayer {
           gets the possible cards to play
          */
         for (Card card : getCards()) {
-            if (card.getValue() == lastPlayedCard.getValue()
-                    || card.getColor() == lastPlayedCard.getColor()
-                    || card.getColor() == CardColor.UNIVERSAL)
+            if (card.isPlayable(lastPlayedCard))
                 possibleCards.add(card);
         }
 
-        if (possibleCards.size() == 0)
-            System.out.println("oops");
+        if (possibleCards.size() == 0) {
+            Card draw = Uno.drawCard();
+            addCard(draw);
+
+            if (draw.isPlayable(lastPlayedCard))
+                return draw;
+            else
+                return null;
+        }
 
         return possibleCards.get(new Random().nextInt(possibleCards.size()));
     }
