@@ -7,7 +7,7 @@ import java.util.Random;
 public class Bot extends TablePlayer {
 
     private static int botCount;
-    private String botName;
+    private final String botName;
 
     public Bot() {
         botCount++;
@@ -17,8 +17,8 @@ public class Bot extends TablePlayer {
     public Card play(Card lastPlayedCard) {
         List<Card> possibleCards = new ArrayList<>();
 
-        /**
-         * gets the possible cards to play
+        /*
+          gets the possible cards to play
          */
         for (Card card : getCards()) {
             if (card.getValue() == lastPlayedCard.getValue()

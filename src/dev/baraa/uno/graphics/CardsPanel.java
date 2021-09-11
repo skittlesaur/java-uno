@@ -4,15 +4,12 @@ import dev.baraa.uno.game.Card;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class CardsPanel extends JPanel {
 
-    private List<Card> cards;
-    private boolean visible;
+    private final List<Card> cards;
+    private final boolean visible;
 
     public CardsPanel(List<Card> cards, boolean visible) {
         this.cards = cards;

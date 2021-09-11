@@ -3,7 +3,6 @@ package dev.baraa.uno.graphics;
 import dev.baraa.uno.Uno;
 import dev.baraa.uno.exceptions.graphics.GameWindowHasBeenInitializedException;
 import dev.baraa.uno.exceptions.graphics.GameWindowNotInitializedException;
-import dev.baraa.uno.game.Card;
 
 import javax.swing.*;
 import java.awt.*;
