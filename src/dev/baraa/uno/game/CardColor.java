@@ -27,4 +27,14 @@ public enum CardColor {
             default -> throw new IllegalStateException("Unexpected value: " + this);
         };
     }
+
+    public int getIndex() {
+        return switch (this) {
+            case YELLOW -> 1;
+            case RED -> 2;
+            case GREEN -> 3;
+            case BLUE -> 4;
+            case UNIVERSAL -> 0;
+        };
+    }
 }
