@@ -3,6 +3,7 @@ package dev.baraa.uno.graphics;
 import dev.baraa.uno.Uno;
 import dev.baraa.uno.exceptions.graphics.GameWindowHasBeenInitializedException;
 import dev.baraa.uno.exceptions.graphics.GameWindowNotInitializedException;
+import dev.baraa.uno.game.Card;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +20,7 @@ public class GameWindow extends JFrame {
     private Point prevLocation;
 
     private CardsPanel[] cardsPanel;
-
+    private PlacedCards placedCards;
 
     private GameWindow() {
         setMinimumSize(new Dimension(700, 600));
@@ -44,6 +45,9 @@ public class GameWindow extends JFrame {
         CardsPanel player3 = new CardsPanel(Uno.getPlayerCards(3), false);
         add(player3, BorderLayout.EAST);
         cardsPanel[3] = player3;
+
+        placedCards = new PlacedCards();
+        add(placedCards);
 
         /*
          * Initializes the previous size and previous location.
@@ -88,5 +92,9 @@ public class GameWindow extends JFrame {
         for (CardsPanel cardsPanel : gameWindow.cardsPanel) {
             cardsPanel.update();
         }
+    }
+
+    public static void updateTable(Card card) {
+        gameWindow.placedCards.update(card);
     }
 }

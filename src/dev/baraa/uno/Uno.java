@@ -41,6 +41,7 @@ public class Uno {
         try {
             game.play(player, card);
             GameWindow.updateCards();
+            GameWindow.updateTable(card);
         } catch (PlayerTurnException e) {
             System.out.println(e.getMessage());
         } catch (IllegalCardException e) {
@@ -48,7 +49,12 @@ public class Uno {
         }
     }
 
-    public static Card drawCard() {
-        return game.getCard();
+    public static Card drawCard(TablePlayer player) {
+        try {
+            return game.drawCard(player);
+        } catch (PlayerTurnException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 }

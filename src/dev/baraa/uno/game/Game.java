@@ -86,6 +86,14 @@ public class Game {
         }
     }
 
+    public Card drawCard(TablePlayer player) throws PlayerTurnException {
+
+        if (getIndex(player) != turn)
+            throw new PlayerTurnException();
+
+        return getCard();
+    }
+
     /**
      * @param player player
      * @return The index of the player in the gamePlayers array.
@@ -96,4 +104,9 @@ public class Game {
                 return i;
         return -1;
     }
+
+    public Card getLastPlayedCard() {
+        return lastPlayedCard;
+    }
+
 }
