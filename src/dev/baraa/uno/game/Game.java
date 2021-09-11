@@ -56,14 +56,27 @@ public class Game {
         if (getIndex(player) != turn)
             throw new PlayerTurnException();
 
+
         /*
-          checks if the card is not a universal card.
-          if so, it checks if it's playable by checking the color of last played card and the new card.
+          checks if the card is not special,
+          if so, checks if the card has the same value of the last played card or same color.
          */
-        CardColor cardColor = card.getColor();
-        if (cardColor != CardColor.UNIVERSAL)
-            if (cardColor != lastPlayedCard.getColor() && card.getValue() != lastPlayedCard.getValue())
+        if (!card.isSpecial()) {
+            if (card.getColor() != lastPlayedCard.getColor()
+                    && card.getValue() != lastPlayedCard.getValue())
                 throw new IllegalCardException(card, lastPlayedCard);
+        } else {
+            /*
+             if the card is special,
+             check if the card special move is CHANGE_COLOR or PLUS_FOUR, if so those cards can be played fine.
+             if not, compare the value and color of the card and last played card.
+             */
+            if (card.getSpecialMove() != SpecialMove.CHANGE_COLOR
+                    && card.getSpecialMove() != SpecialMove.PLUS_FOUR)
+                if (card.getColor() != lastPlayedCard.getColor()
+                        && card.getValue() != lastPlayedCard.getValue())
+                    throw new IllegalCardException(card, lastPlayedCard);
+        }
 
         //TODO: remove this
         if (card.getColor() == CardColor.UNIVERSAL)
@@ -101,7 +114,7 @@ public class Game {
         if (currentPlayer instanceof Bot) {
             Card botCard = ((Bot) currentPlayer).play(lastPlayedCard);
 
-            if (botCard != null && botCard.isPlayable(lastPlayedCard))
+            if (botCard != null)
                 Uno.play(currentPlayer, botCard);
             else
                 nextTurn();
