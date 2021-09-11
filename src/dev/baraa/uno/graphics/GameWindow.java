@@ -27,18 +27,24 @@ public class GameWindow extends JFrame {
         setLocationRelativeTo(null);
         //setUndecorated(true);
 
+        JPanel gameAction = new JPanel();
+        gameAction.setOpaque(false);
+        gameAction.setLayout(new BorderLayout());
+
         cardsPanel = new CardsPanel[2];
 
         CardsPanel player0 = new CardsPanel(Uno.getPlayerCards(0), true);
-        add(player0, BorderLayout.SOUTH);
+        gameAction.add(player0, BorderLayout.SOUTH);
         cardsPanel[0] = player0;
 
         CardsPanel player2 = new CardsPanel(Uno.getPlayerCards(1), false);
-        add(player2, BorderLayout.NORTH);
+        gameAction.add(player2, BorderLayout.NORTH);
         cardsPanel[1] = player2;
 
         placedCards = new PlacedCards();
-        add(placedCards);
+        gameAction.add(placedCards);
+
+        add(gameAction);
 
         /*
          * Initializes the previous size and previous location.
