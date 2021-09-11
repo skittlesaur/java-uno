@@ -33,8 +33,6 @@ public class Game {
             lastPlayedCard = getCard();
         while (lastPlayedCard.isSpecial());
 
-        System.out.println(lastPlayedCard);
-
         // turn = new Random().nextInt(4);
     }
 
@@ -65,6 +63,10 @@ public class Game {
             if (cardColor != lastPlayedCard.getColor() && card.getValue() != lastPlayedCard.getValue())
                 throw new IllegalCardException(card, lastPlayedCard);
 
+        //TODO: remove this
+        if (card.getColor() == CardColor.UNIVERSAL)
+            card.setColor(CardColor.RED);
+
         player.removeCard(card);
         lastPlayedCard = card;
 
@@ -73,7 +75,6 @@ public class Game {
 
     private void nextTurn() {
         turn = (turn + 1) % 4;
-        System.out.println(turn);
         TablePlayer currentPlayer = gamePlayers[turn];
 
         if (currentPlayer instanceof Bot) {

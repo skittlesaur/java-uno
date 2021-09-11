@@ -73,13 +73,19 @@ public class Card {
         return "Card{" +
                 "value=" + value +
                 ", color=" + color +
-                ", special=" + special +
                 ", specialMove=" + specialMove +
-                ", holder=" + holder +
                 '}';
     }
 
     public boolean isSpecial() {
         return special;
+    }
+
+    public SpecialMove getSpecialMove() {
+        return specialMove;
+    }
+
+    public void setColor(CardColor color) {
+        this.color = color;
     }
 }

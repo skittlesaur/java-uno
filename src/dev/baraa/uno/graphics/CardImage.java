@@ -25,6 +25,8 @@ public class CardImage extends JPanel {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                if (card.getHolder() == null)
+                    return;
                 if (card.getHolder().isLocalPlayer()) {
                     Uno.play(card.getHolder(), card);
                 }

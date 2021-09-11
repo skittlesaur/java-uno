@@ -27,6 +27,7 @@ public class Uno {
         ImageProvider.load();
         game = new Game();
         GameWindow.initialize();
+        GameWindow.updateTable(game.getLastPlayedCard());
     }
 
     private static void run() throws GameWindowNotInitializedException {
