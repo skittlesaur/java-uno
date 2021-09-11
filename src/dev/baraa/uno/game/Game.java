@@ -15,6 +15,8 @@ public class Game {
     private final Player player;
     private Card lastPlayedCard;
 
+    private int direction = 1;
+
     public Game() {
         gamePlayers = new TablePlayer[4];
 
@@ -74,8 +76,29 @@ public class Game {
     }
 
     private void nextTurn() {
-        turn = (turn + 1) % 4;
+
+        int changeVal = 1 * direction;
+
+        if (lastPlayedCard.isSpecial()) {
+            if (lastPlayedCard.getSpecialMove() == SpecialMove.SKIP) {
+                changeVal = 2 * direction;
+            } else if (lastPlayedCard.getSpecialMove() == SpecialMove.REVERSE) {
+                direction *= -1;
+            }
+        }
+
+        turn = (turn + changeVal) % 4;
+        if (turn < 0)
+            turn = 4;
         TablePlayer currentPlayer = gamePlayers[turn];
+
+        if (lastPlayedCard.isSpecial()) {
+            if (lastPlayedCard.getSpecialMove() == SpecialMove.PLUS_TWO) {
+                plusCards(currentPlayer, 2);
+            } else if (lastPlayedCard.getSpecialMove() == SpecialMove.PLUS_FOUR) {
+                plusCards(currentPlayer, 4);
+            }
+        }
 
         if (currentPlayer instanceof Bot) {
             Card botCard = ((Bot) currentPlayer).play(lastPlayedCard);
@@ -84,6 +107,12 @@ public class Game {
                 Uno.play(currentPlayer, botCard);
             else
                 nextTurn();
+        }
+    }
+
+    private void plusCards(TablePlayer tablePlayer, int amount) {
+        for (int i = 0; i < amount; i++) {
+            tablePlayer.addCard(getCard());
         }
     }
 

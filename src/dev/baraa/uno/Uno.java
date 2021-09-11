@@ -39,6 +39,8 @@ public class Uno {
     }
 
     public static void play(TablePlayer player, Card card) {
+
+        System.out.println(player + " " + card);
         try {
             game.play(player, card);
             GameWindow.updateCards();

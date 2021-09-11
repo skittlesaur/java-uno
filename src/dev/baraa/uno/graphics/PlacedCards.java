@@ -22,26 +22,9 @@ public class PlacedCards extends JLayeredPane {
         if (card == null)
             return;
 
-        updateCards();
-        cards[0] = new CardImage(card, true);
-
-        removeAll();
-
-        int i = visibleCards;
-        for (CardImage cardImage : cards) {
-            if (cardImage == null)
-                break;
-            add(cardImage, i);
-            i--;
-        }
+        add(new CardImage(card, true));
 
         repaint();
         revalidate();
-    }
-
-    private void updateCards() {
-        for (int i = cards.length - 1; i > 1; i--) {
-            cards[i] = cards[i - 1];
-        }
     }
 }
