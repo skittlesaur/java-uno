@@ -10,15 +10,21 @@ import java.util.Map;
 public class ImageProvider {
 
     private static Map<String, BufferedImage> cards;
+    private static BufferedImage arrow;
 
     public static void load() throws IOException {
+        arrow = readImage("arrow");
         cards = new HashMap<>();
         mapCards();
     }
 
-    private static BufferedImage readCardImage(String name) throws IOException {
-        InputStream inputStream = ImageProvider.class.getClassLoader().getResourceAsStream("res/cards/" + name + ".png");
+    private static BufferedImage readImage(String path) throws IOException {
+        InputStream inputStream = ImageProvider.class.getClassLoader().getResourceAsStream("res/" + path + ".png");
         return ImageIO.read(inputStream);
+    }
+
+    private static BufferedImage readCardImage(String name) throws IOException {
+        return readImage("cards/" + name);
     }
 
     /**
@@ -49,5 +55,9 @@ public class ImageProvider {
      */
     public static BufferedImage getCard(String cardName) {
         return cards.get(cardName);
+    }
+
+    public static BufferedImage getArrow() {
+        return arrow;
     }
 }
