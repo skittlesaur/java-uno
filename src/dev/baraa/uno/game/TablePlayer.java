@@ -6,6 +6,7 @@ public abstract class TablePlayer {
 
     private ArrayList<Card> cards;
     private boolean localPlayer;
+    private boolean uno;
 
     public TablePlayer(boolean localPlayer) {
         this();
@@ -36,5 +37,14 @@ public abstract class TablePlayer {
 
     public void setLocalPlayer(boolean localPlayer) {
         this.localPlayer = localPlayer;
+    }
+
+    public boolean isUno() {
+        return uno;
+    }
+
+    public void setUno(boolean uno) {
+        System.out.println(this + " UNO!");
+        this.uno = uno;
     }
 }

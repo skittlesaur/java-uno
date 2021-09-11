@@ -87,6 +87,20 @@ public class Game {
 
         player.removeCard(card);
         lastPlayedCard = card;
+
+        if (player.getCards().size() == 1 && !player.isUno())
+            unoPenalty(player);
+
+        if (player.getCards().size() == 0) {
+            System.out.println("WINNER " + player);
+        }
+
+        if (player.getCards().size() > 1)
+            player.setUno(false);
+    }
+
+    private void unoPenalty(TablePlayer player) {
+        plusCards(player, 2);
     }
 
     public void nextTurn() {

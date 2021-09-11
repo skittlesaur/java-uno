@@ -37,6 +37,10 @@ public class Bot extends TablePlayer {
             if (draw.isPlayable(lastPlayedCard)) {
                 if (draw.getColor() == CardColor.UNIVERSAL)
                     draw.setColor(getBestColor());
+
+                if (getCards().size() - 1 == 1)
+                    setUno(true);
+
                 return draw;
             } else
                 return null;
@@ -46,6 +50,9 @@ public class Bot extends TablePlayer {
 
         if (card.getColor() == CardColor.UNIVERSAL)
             card.setColor(getBestColor());
+
+        if (getCards().size() - 1 == 1)
+            setUno(true);
 
         return card;
     }
