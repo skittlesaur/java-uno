@@ -14,7 +14,7 @@ public class Game {
     public Game() {
         gamePlayers = new TablePlayer[4];
 
-        player = new Player("Baraa");
+        player = new Player(true);
         gamePlayers[0] = player;
 
         gamePlayers[1] = new Bot();

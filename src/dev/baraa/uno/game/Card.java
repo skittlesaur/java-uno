@@ -8,6 +8,8 @@ public class Card {
     private boolean special;
     private SpecialMove specialMove;
 
+    private TablePlayer holder;
+
     /**
      * Creates an UNO card and generates its color based on a given value.
      *
@@ -38,16 +40,6 @@ public class Card {
         this.specialMove = SpecialMove.getSpecialMove(value);
     }
 
-    @Override
-    public String toString() {
-        return "Card{" +
-                "value=" + value +
-                ", color=" + color +
-                ", special=" + special +
-                ", specialMove=" + specialMove +
-                '}';
-    }
-
     public int getValue() {
         return value;
     }
@@ -58,5 +50,24 @@ public class Card {
 
     public String getCardName() {
         return value + "" + color;
+    }
+
+    public TablePlayer getHolder() {
+        return holder;
+    }
+
+    public void setHolder(TablePlayer holder) {
+        this.holder = holder;
+    }
+
+    @Override
+    public String toString() {
+        return "Card{" +
+                "value=" + value +
+                ", color=" + color +
+                ", special=" + special +
+                ", specialMove=" + specialMove +
+                ", holder=" + holder +
+                '}';
     }
 }

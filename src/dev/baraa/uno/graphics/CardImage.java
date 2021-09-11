@@ -24,19 +24,23 @@ public class CardImage extends JPanel {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
+                System.out.println(card.toString());
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                setPreferredSize(new Dimension(130, 200));
-                revalidate();
+                if (card.getHolder().isLocalPlayer()) {
+                    setPreferredSize(new Dimension(130, 200));
+                    revalidate();
+                }
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                setPreferredSize(new Dimension(100, 155));
-                revalidate();
+                if (card.getHolder().isLocalPlayer()) {
+                    setPreferredSize(new Dimension(100, 155));
+                    revalidate();
+                }
             }
         });
     }
