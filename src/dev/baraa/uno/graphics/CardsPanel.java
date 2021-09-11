@@ -12,9 +12,13 @@ public class CardsPanel extends JPanel {
     private final boolean visible;
     private int angle;
 
+    private JLabel cardsCount;
+
     public CardsPanel(List<Card> cards, boolean visible) {
         this.cards = cards;
         this.visible = visible;
+
+        cardsCount = new JLabel(String.valueOf(cards.size()));
 
         setOpaque(false);
         setPreferredSize(new Dimension(200, 200));
@@ -31,6 +35,8 @@ public class CardsPanel extends JPanel {
 
     public void update() {
         removeAll();
+        cardsCount.setText(String.valueOf(cards.size()));
+        add(cardsCount);
 
         for (Card card : cards) {
             CardImage cardDisplay = new CardImage(card, visible);
