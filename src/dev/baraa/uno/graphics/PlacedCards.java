@@ -48,7 +48,7 @@ public class PlacedCards extends JLayeredPane {
         }
 
         arrow.setSize(500, 500);
-        add(arrow, Integer.valueOf(0));
+        //add(arrow, Integer.valueOf(0));
 
         repaint();
         revalidate();
