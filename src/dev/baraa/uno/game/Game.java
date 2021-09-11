@@ -85,8 +85,6 @@ public class Game {
         player.removeCard(card);
         lastPlayedCard = card;
 
-        gamePlayers[getNextTurn()].setPlayerTurn(true);
-
         if (player.getCards().size() == 1 && !player.isUno())
             unoPenalty(player);
 
@@ -115,6 +113,8 @@ public class Game {
         } else {
             changeVal = 1;
         }
+
+        gamePlayers[getNextTurn()].setPlayerTurn(true);
     }
 
     private void unoPenalty(TablePlayer player) {
@@ -134,7 +134,7 @@ public class Game {
     private int getNextTurn() {
         int val = (turn + changeVal * direction) % 4;
         if (val < 0)
-            val = 3;
+            val = 4 + val;
         return val;
     }
 
