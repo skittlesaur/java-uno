@@ -43,7 +43,7 @@ public class PlacedCards extends JLayeredPane {
 
 
         for (int i = 0; i < cards.size(); i++) {
-            cards.get(i).setSize(200, 200);
+            cards.get(i).setSize(250, 250);
             add(cards.get(i), Integer.valueOf(i + 1));
         }
 

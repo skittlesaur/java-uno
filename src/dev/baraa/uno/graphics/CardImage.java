@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
 public class CardImage extends JPanel {
@@ -22,7 +23,7 @@ public class CardImage extends JPanel {
         this.card = card;
         this.visible = visible;
         setOpaque(false);
-        setPreferredSize(new Dimension(100, 155));
+        setPreferredSize(new Dimension(130, 180));
         setLayout(new BorderLayout());
 
         addMouseListener(new MouseAdapter() {
@@ -40,7 +41,7 @@ public class CardImage extends JPanel {
                 if (card.getHolder() == null)
                     return;
                 if (card.getHolder().isLocalPlayer()) {
-                    setPreferredSize(new Dimension(130, 200));
+                    setPreferredSize(new Dimension(130, 180));
                     revalidate();
                 }
             }
@@ -50,7 +51,7 @@ public class CardImage extends JPanel {
                 if (card.getHolder() == null)
                     return;
                 if (card.getHolder().isLocalPlayer()) {
-                    setPreferredSize(new Dimension(100, 155));
+                    setPreferredSize(new Dimension(130, 180));
                     revalidate();
                 }
             }
@@ -66,37 +67,29 @@ public class CardImage extends JPanel {
 
         cardImage = rotateImageByDegrees(cardImage, angle);
 
-        graphics2D.drawImage(cardImage, 0, 0, getWidth() - cardImage.getWidth() / getWidth() - cardImage.getHeight() / getHeight(), getHeight(), this);
+        graphics2D.drawImage(cardImage, 0, 0, this);
 
         if (locked) {
             graphics2D.setColor(new Color(0xCD181818, true));
             graphics2D.fillRoundRect(0, 0, getWidth(), getHeight(), 5, 5);
         }
+        graphics2D.dispose();
     }
 
-    public BufferedImage rotateImageByDegrees(BufferedImage img, double angle) {
-
-        double rads = Math.toRadians(angle);
-        double sin = Math.abs(Math.sin(rads)), cos = Math.abs(Math.cos(rads));
-        int w = img.getWidth();
-        int h = img.getHeight();
-        int newWidth = (int) Math.floor(w * cos + h * sin);
-        int newHeight = (int) Math.floor(h * cos + w * sin);
-
-        BufferedImage rotated = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = rotated.createGraphics();
-        AffineTransform at = new AffineTransform();
-        at.translate((newWidth - w) / 2d, (newHeight - h) / 2d);
-
-        int x = w / 2;
-        int y = h / 2;
-
-        at.rotate(rads, x, y);
-        g2d.setTransform(at);
-        g2d.drawImage(img, 0, 0, this);
-        g2d.dispose();
-
-        return rotated;
+    public BufferedImage rotateImageByDegrees(BufferedImage image, double angle) {
+        final double rads = Math.toRadians(angle);
+        final double sin = Math.abs(Math.sin(rads));
+        final double cos = Math.abs(Math.cos(rads));
+        final int w = (int) Math.floor(image.getWidth() * cos + image.getHeight() * sin);
+        final int h = (int) Math.floor(image.getHeight() * cos + image.getWidth() * sin);
+        final BufferedImage rotatedImage = new BufferedImage(w, h, image.getType());
+        final AffineTransform at = new AffineTransform();
+        at.translate(w / 2, h / 2);
+        at.rotate(rads, 0, 0);
+        at.translate(-image.getWidth() / 2, -image.getHeight() / 2);
+        final AffineTransformOp rotateOp = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
+        rotateOp.filter(image, rotatedImage);
+        return rotatedImage;
     }
 
 
