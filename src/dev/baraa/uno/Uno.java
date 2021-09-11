@@ -40,11 +40,11 @@ public class Uno {
 
     public static void play(TablePlayer player, Card card) {
 
-        System.out.println(player + " " + card);
         try {
             game.play(player, card);
             GameWindow.updateCards();
             GameWindow.updateTable(card);
+            game.nextTurn();
         } catch (PlayerTurnException e) {
             System.out.println(e.getMessage());
         } catch (IllegalCardException e) {

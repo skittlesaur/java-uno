@@ -71,11 +71,9 @@ public class Game {
 
         player.removeCard(card);
         lastPlayedCard = card;
-
-        nextTurn();
     }
 
-    private void nextTurn() {
+    public void nextTurn() {
 
         int changeVal = 1 * direction;
 
@@ -89,7 +87,7 @@ public class Game {
 
         turn = (turn + changeVal) % 4;
         if (turn < 0)
-            turn = 4;
+            turn = 3;
         TablePlayer currentPlayer = gamePlayers[turn];
 
         if (lastPlayedCard.isSpecial()) {
