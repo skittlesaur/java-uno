@@ -4,19 +4,18 @@ import dev.baraa.uno.game.Card;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
-public class CardDisplay extends JPanel {
+public class CardImage extends JPanel {
 
     private Card card;
     private boolean visible;
     private int rotation;
 
-    public CardDisplay(Card card, boolean visible) {
+    public CardImage(Card card, boolean visible) {
         this.card = card;
         this.visible = visible;
-        //setOpaque(false);
+        setOpaque(false);
         setPreferredSize(new Dimension((int) (165 * 0.6), (int) (255 * 0.6)));
         setLayout(new BorderLayout());
     }
@@ -27,7 +26,8 @@ public class CardDisplay extends JPanel {
 
         String cardName = visible ? card.getCardName() : "Default";
         BufferedImage cardImage = ImageProvider.getCard(cardName);
-        graphics2D.drawImage(cardImage, 0, 0, getWidth(), getHeight(), null);
+
+        graphics2D.drawImage(cardImage, 0, 0, getWidth(), getHeight(), this);
     }
 
     public void setRotation(int rotation) {

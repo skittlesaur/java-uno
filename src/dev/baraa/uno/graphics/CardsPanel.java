@@ -7,26 +7,26 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cards extends JPanel {
+public class CardsPanel extends JPanel {
 
-    private ArrayList<CardDisplay> cardDisplays;
+    private ArrayList<CardImage> cardImages;
 
-    public Cards(List<Card> cards, boolean visible) {
-        cardDisplays = new ArrayList<>();
+    public CardsPanel(List<Card> cards, boolean visible) {
+        cardImages = new ArrayList<>();
 
         setOpaque(false);
         setPreferredSize(new Dimension(200, 200));
         setBorder(BorderFactory.createEmptyBorder(10, 10, 20, 10));
 
         for (Card card : cards) {
-            CardDisplay cardDisplay = new CardDisplay(card, visible);
+            CardImage cardDisplay = new CardImage(card, visible);
             add(cardDisplay);
-            cardDisplays.add(cardDisplay);
+            cardImages.add(cardDisplay);
         }
     }
 
     public void setRotation(int rotation) {
-        for (CardDisplay card : cardDisplays)
+        for (CardImage card : cardImages)
             card.setRotation(rotation);
     }
 }
