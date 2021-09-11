@@ -1,6 +1,5 @@
 package dev.baraa.uno.graphics;
 
-import dev.baraa.uno.Controller;
 import dev.baraa.uno.Uno;
 import dev.baraa.uno.exceptions.graphics.GameWindowHasBeenInitializedException;
 import dev.baraa.uno.exceptions.graphics.GameWindowNotInitializedException;
@@ -25,17 +24,17 @@ public class GameWindow extends JFrame {
         setLocationRelativeTo(null);
         //setUndecorated(true);
 
-        CardsPanel player0 = new CardsPanel(Controller.getPlayerCards(0), true);
+        CardsPanel player0 = new CardsPanel(Uno.getPlayerCards(0), true);
         add(player0, BorderLayout.SOUTH);
 
-        CardsPanel player1 = new CardsPanel(Controller.getPlayerCards(1), false);
+        CardsPanel player1 = new CardsPanel(Uno.getPlayerCards(1), false);
         player1.setRotation(90);
         add(player1, BorderLayout.WEST);
 
-        CardsPanel player2 = new CardsPanel(Controller.getPlayerCards(2), true);
+        CardsPanel player2 = new CardsPanel(Uno.getPlayerCards(2), true);
         add(player2, BorderLayout.NORTH);
 
-        CardsPanel player3 = new CardsPanel(Controller.getPlayerCards(3), false);
+        CardsPanel player3 = new CardsPanel(Uno.getPlayerCards(3), false);
         add(player3, BorderLayout.EAST);
 
         /*
