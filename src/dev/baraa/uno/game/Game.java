@@ -139,7 +139,7 @@ public class Game {
     }
 
     private void botTurn(TablePlayer currentPlayer) {
-        int randomDelay = (int) (Math.random() * (1000) + 500);
+        int randomDelay = (int) (Math.random() * (1000) + 800);
 
         Timer timer = new Timer(randomDelay, e -> {
             Card botCard = ((Bot) currentPlayer).play(lastPlayedCard);

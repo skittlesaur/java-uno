@@ -18,12 +18,13 @@ public class CardImage extends JPanel {
     private int angle;
 
     private boolean locked;
+    private final int width = 130, height = 180;
 
     public CardImage(Card card, boolean visible) {
         this.card = card;
         this.visible = visible;
         setOpaque(false);
-        setPreferredSize(new Dimension(130, 180));
+        setPreferredSize(new Dimension(width, height));
         setLayout(new BorderLayout());
 
         addMouseListener(new MouseAdapter() {
@@ -41,7 +42,7 @@ public class CardImage extends JPanel {
                 if (card.getHolder() == null)
                     return;
                 if (card.getHolder().isLocalPlayer()) {
-                    setPreferredSize(new Dimension(130, 180));
+                    setPreferredSize(new Dimension((int) (width * 1.1), (int) (height * 1.1)));
                     revalidate();
                 }
             }
@@ -51,7 +52,7 @@ public class CardImage extends JPanel {
                 if (card.getHolder() == null)
                     return;
                 if (card.getHolder().isLocalPlayer()) {
-                    setPreferredSize(new Dimension(130, 180));
+                    setPreferredSize(new Dimension(width, height));
                     revalidate();
                 }
             }
@@ -67,11 +68,11 @@ public class CardImage extends JPanel {
 
         cardImage = rotateImageByDegrees(cardImage, angle);
 
-        graphics2D.drawImage(cardImage, 0, 0, this);
+        graphics2D.drawImage(cardImage, getWidth() / 2 - cardImage.getWidth() / 2, 0, this);
 
         if (locked) {
             graphics2D.setColor(new Color(0xCD181818, true));
-            graphics2D.fillRoundRect(0, 0, getWidth(), getHeight(), 5, 5);
+            graphics2D.fillRoundRect((getWidth() > width) ? (int) (width * 0.05) : 0, 0, cardImage.getWidth(), cardImage.getHeight(), 5, 5);
         }
         graphics2D.dispose();
     }

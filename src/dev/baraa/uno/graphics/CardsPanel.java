@@ -23,7 +23,7 @@ public class CardsPanel extends JPanel {
 
         setOpaque(false);
         setPreferredSize(new Dimension(200, 200));
-        setBorder(BorderFactory.createEmptyBorder(10, 10, 20, 10));
+        //setBorder(BorderFactory.createEmptyBorder(10, 10, 20, 10));
 
         update();
     }

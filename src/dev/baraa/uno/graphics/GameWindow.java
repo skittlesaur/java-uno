@@ -38,7 +38,7 @@ public class GameWindow extends JFrame {
         add(player1, BorderLayout.WEST);
         cardsPanel[1] = player1;
 
-        CardsPanel player2 = new CardsPanel(Uno.getPlayerCards(2), true);
+        CardsPanel player2 = new CardsPanel(Uno.getPlayerCards(2), false);
         add(player2, BorderLayout.NORTH);
         cardsPanel[2] = player2;
 
