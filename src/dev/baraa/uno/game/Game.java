@@ -4,6 +4,9 @@ import dev.baraa.uno.Uno;
 import dev.baraa.uno.exceptions.game.PlayerTurnException;
 import dev.baraa.uno.exceptions.game.IllegalCardException;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -112,13 +115,23 @@ public class Game {
         }
 
         if (currentPlayer instanceof Bot) {
+            botTurn(currentPlayer);
+        }
+    }
+
+    private void botTurn(TablePlayer currentPlayer) {
+        int randomDelay = (int) (Math.random() * (1000) + 500);
+
+        Timer timer = new Timer(randomDelay, e -> {
             Card botCard = ((Bot) currentPlayer).play(lastPlayedCard);
 
             if (botCard != null)
                 Uno.play(currentPlayer, botCard);
             else
                 nextTurn();
-        }
+        });
+        timer.setRepeats(false);
+        timer.start();
     }
 
     private void plusCards(TablePlayer tablePlayer, int amount) {
