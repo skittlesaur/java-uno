@@ -21,14 +21,12 @@ public class Game {
     private int changeVal = 1;
 
     public Game() {
-        gamePlayers = new TablePlayer[4];
+        gamePlayers = new TablePlayer[2];
 
         player = new Player(true);
         gamePlayers[0] = player;
 
         gamePlayers[1] = new Bot();
-        gamePlayers[2] = new Bot();
-        gamePlayers[3] = new Bot();
 
         for (TablePlayer tablePlayer : gamePlayers)
             for (int i = 0; i < 7; i++)
@@ -38,12 +36,15 @@ public class Game {
             lastPlayedCard = getCard();
         while (lastPlayedCard.isSpecial());
 
+        gamePlayers[0].addCard(new Card(10));
+        gamePlayers[0].addCard(new Card(12));
+
         gamePlayers[turn].setPlayerTurn(true);
     }
 
     public Card getCard() {
         Random random = new Random();
-        int randomValue = random.nextInt(14);
+        int randomValue = random.nextInt(15);
         return new Card(randomValue);
     }
 
@@ -102,10 +103,13 @@ public class Game {
             } else if (lastPlayedCard.getSpecialMove() == SpecialMove.REVERSE) {
                 direction *= -1;
             } else if (lastPlayedCard.getSpecialMove() == SpecialMove.PLUS_TWO) {
+                changeVal = 1;
                 TablePlayer affectedPlayer = gamePlayers[getNextTurn()];
+                System.out.println(affectedPlayer);
                 plusCards(affectedPlayer, 2);
                 changeVal = 2;
             } else if (lastPlayedCard.getSpecialMove() == SpecialMove.PLUS_FOUR) {
+                changeVal = 1;
                 TablePlayer affectedPlayer = gamePlayers[getNextTurn()];
                 plusCards(affectedPlayer, 4);
                 changeVal = 2;
@@ -132,9 +136,9 @@ public class Game {
     }
 
     private int getNextTurn() {
-        int val = (turn + changeVal * direction) % 4;
+        int val = (turn + changeVal * direction) % gamePlayers.length;
         if (val < 0)
-            val = 4 + val;
+            val = gamePlayers.length + val;
         return val;
     }
 
