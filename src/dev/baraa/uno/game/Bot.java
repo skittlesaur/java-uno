@@ -10,4 +10,8 @@ public class Bot extends TablePlayer {
         botName = "Bot" + botCount;
     }
 
+    public Card play() {
+        return null;
+    }
+
 }

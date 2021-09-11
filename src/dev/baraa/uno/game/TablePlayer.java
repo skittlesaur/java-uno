@@ -21,7 +21,7 @@ public abstract class TablePlayer {
         cards.add(card);
     }
 
-    public void playCard(Card card) {
+    public void removeCard(Card card) {
         card.setHolder(null);
         cards.remove(card);
     }

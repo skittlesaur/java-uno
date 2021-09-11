@@ -70,4 +70,8 @@ public class Card {
                 ", holder=" + holder +
                 '}';
     }
+
+    public boolean isSpecial() {
+        return special;
+    }
 }

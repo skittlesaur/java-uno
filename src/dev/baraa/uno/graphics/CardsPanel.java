@@ -29,4 +29,8 @@ public class CardsPanel extends JPanel {
         for (CardImage card : cardImages)
             card.setRotation(rotation);
     }
+
+    public ArrayList<CardImage> getCardImages() {
+        return cardImages;
+    }
 }

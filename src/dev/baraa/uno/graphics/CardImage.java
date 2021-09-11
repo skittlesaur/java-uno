@@ -1,5 +1,6 @@
 package dev.baraa.uno.graphics;
 
+import dev.baraa.uno.Uno;
 import dev.baraa.uno.game.Card;
 
 import javax.swing.*;
@@ -24,11 +25,21 @@ public class CardImage extends JPanel {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println(card.toString());
+                if (card.getHolder().isLocalPlayer()) {
+                    if (Uno.play(card.getHolder(), card)) {
+                        CardsPanel parent = ((CardsPanel) getParent());
+                        parent.getCardImages().remove(CardImage.this);
+                        parent.remove(CardImage.this);
+                        parent.repaint();
+                        parent.revalidate();
+                    }
+                }
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
+                if (card.getHolder() == null)
+                    return;
                 if (card.getHolder().isLocalPlayer()) {
                     setPreferredSize(new Dimension(130, 200));
                     revalidate();
@@ -37,6 +48,8 @@ public class CardImage extends JPanel {
 
             @Override
             public void mouseExited(MouseEvent e) {
+                if (card.getHolder() == null)
+                    return;
                 if (card.getHolder().isLocalPlayer()) {
                     setPreferredSize(new Dimension(100, 155));
                     revalidate();

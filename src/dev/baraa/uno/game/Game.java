@@ -1,5 +1,8 @@
 package dev.baraa.uno.game;
 
+import dev.baraa.uno.exceptions.game.PlayerTurnException;
+import dev.baraa.uno.exceptions.game.IllegalCardException;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -27,9 +30,11 @@ public class Game {
 
         do
             lastPlayedCard = getCard();
-        while (lastPlayedCard.getColor() != CardColor.UNIVERSAL);
+        while (lastPlayedCard.isSpecial());
 
-        turn = new Random().nextInt(4);
+        System.out.println(lastPlayedCard);
+
+        // turn = new Random().nextInt(4);
     }
 
     private Card getCard() {
@@ -42,5 +47,37 @@ public class Game {
 
     public ArrayList getPlayerCards(int playerIndex) {
         return gamePlayers[playerIndex].getCards();
+    }
+
+    public void play(TablePlayer player, Card card) throws PlayerTurnException, IllegalCardException {
+
+        /**
+         * If not the player turn, throw an exception.
+         */
+        if (getIndex(player) != turn)
+            throw new PlayerTurnException();
+
+        /**
+         * checks if the card is not a universal card.
+         * if so, it checks if it's playable by checking the color of last played card and the new card.
+         */
+        CardColor cardColor = card.getColor();
+        if (cardColor != CardColor.UNIVERSAL)
+            if (cardColor != lastPlayedCard.getColor() && card.getValue() != lastPlayedCard.getValue())
+                throw new IllegalCardException(card, lastPlayedCard);
+
+        player.removeCard(card);
+        lastPlayedCard = card;
+    }
+
+    /**
+     * @param player
+     * @return The index of the player in the gamePlayers array.
+     */
+    private int getIndex(TablePlayer player) {
+        for (int i = 0; i < gamePlayers.length; i++)
+            if (gamePlayers[i].equals(player))
+                return i;
+        return -1;
     }
 }

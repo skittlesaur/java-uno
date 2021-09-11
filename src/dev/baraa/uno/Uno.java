@@ -1,9 +1,13 @@
 package dev.baraa.uno;
 
+import dev.baraa.uno.exceptions.game.PlayerTurnException;
+import dev.baraa.uno.exceptions.game.IllegalCardException;
 import dev.baraa.uno.exceptions.graphics.GameWindowHasBeenInitializedException;
 import dev.baraa.uno.exceptions.graphics.GameWindowNotInitializedException;
 import dev.baraa.uno.exceptions.graphics.GraphicsException;
+import dev.baraa.uno.game.Card;
 import dev.baraa.uno.game.Game;
+import dev.baraa.uno.game.TablePlayer;
 import dev.baraa.uno.graphics.GameWindow;
 import dev.baraa.uno.graphics.ImageProvider;
 
@@ -33,4 +37,15 @@ public class Uno {
         return game.getPlayerCards(playerIndex);
     }
 
+    public static boolean play(TablePlayer player, Card card) {
+        try {
+            game.play(player, card);
+            return true;
+        } catch (PlayerTurnException e) {
+            System.out.println(e.getMessage());
+        } catch (IllegalCardException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
 }
