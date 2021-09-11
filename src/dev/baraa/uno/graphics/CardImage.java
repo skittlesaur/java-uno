@@ -4,6 +4,8 @@ import dev.baraa.uno.game.Card;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 public class CardImage extends JPanel {
@@ -16,8 +18,27 @@ public class CardImage extends JPanel {
         this.card = card;
         this.visible = visible;
         setOpaque(false);
-        setPreferredSize(new Dimension((int) (165 * 0.6), (int) (255 * 0.6)));
+        setPreferredSize(new Dimension(100, 155));
         setLayout(new BorderLayout());
+
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                setPreferredSize(new Dimension(130, 200));
+                revalidate();
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                setPreferredSize(new Dimension(100, 155));
+                revalidate();
+            }
+        });
     }
 
     @Override
