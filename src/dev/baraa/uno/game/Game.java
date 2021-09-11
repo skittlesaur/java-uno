@@ -5,8 +5,6 @@ import dev.baraa.uno.exceptions.game.PlayerTurnException;
 import dev.baraa.uno.exceptions.game.IllegalCardException;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -19,6 +17,7 @@ public class Game {
     private Card lastPlayedCard;
 
     private int direction = 1;
+    private int changeVal = 1;
 
     public Game() {
         gamePlayers = new TablePlayer[4];
@@ -97,6 +96,25 @@ public class Game {
 
         if (player.getCards().size() > 1)
             player.setUno(false);
+
+
+        if (lastPlayedCard.isSpecial()) {
+            if (lastPlayedCard.getSpecialMove() == SpecialMove.SKIP) {
+                changeVal = 2;
+            } else if (lastPlayedCard.getSpecialMove() == SpecialMove.REVERSE) {
+                direction *= -1;
+            } else if (lastPlayedCard.getSpecialMove() == SpecialMove.PLUS_TWO) {
+                TablePlayer affectedPlayer = gamePlayers[getNextTurn()];
+                plusCards(affectedPlayer, 2);
+                changeVal = 2;
+            } else if (lastPlayedCard.getSpecialMove() == SpecialMove.PLUS_FOUR) {
+                TablePlayer affectedPlayer = gamePlayers[getNextTurn()];
+                plusCards(affectedPlayer, 4);
+                changeVal = 2;
+            }
+        } else {
+            changeVal = 1;
+        }
     }
 
     private void unoPenalty(TablePlayer player) {
@@ -105,32 +123,19 @@ public class Game {
 
     public void nextTurn() {
 
-        int changeVal = 1 * direction;
-
-        if (lastPlayedCard.isSpecial()) {
-            if (lastPlayedCard.getSpecialMove() == SpecialMove.SKIP) {
-                changeVal = 2 * direction;
-            } else if (lastPlayedCard.getSpecialMove() == SpecialMove.REVERSE) {
-                direction *= -1;
-            }
-        }
-
-        turn = (turn + changeVal) % 4;
-        if (turn < 0)
-            turn = 3;
+        turn = getNextTurn();
         TablePlayer currentPlayer = gamePlayers[turn];
-
-        if (lastPlayedCard.isSpecial()) {
-            if (lastPlayedCard.getSpecialMove() == SpecialMove.PLUS_TWO) {
-                plusCards(currentPlayer, 2);
-            } else if (lastPlayedCard.getSpecialMove() == SpecialMove.PLUS_FOUR) {
-                plusCards(currentPlayer, 4);
-            }
-        }
 
         if (currentPlayer instanceof Bot) {
             botTurn(currentPlayer);
         }
+    }
+
+    private int getNextTurn() {
+        int val = (turn + changeVal * direction) % 4;
+        if (val < 0)
+            val = 3;
+        return val;
     }
 
     private void botTurn(TablePlayer currentPlayer) {
