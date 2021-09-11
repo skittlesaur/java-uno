@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class PlacedCards extends JLayeredPane {
 
@@ -29,7 +30,9 @@ public class PlacedCards extends JLayeredPane {
             cards.remove(0);
         }
 
-        cards.add(new CardImage(card, true));
+        CardImage cardImage = new CardImage(card, true);
+        cardImage.setAngle(new Random().nextInt(360));
+        cards.add(cardImage);
 
         removeAll();
 

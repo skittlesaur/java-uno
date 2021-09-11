@@ -34,7 +34,7 @@ public class GameWindow extends JFrame {
         cardsPanel[0] = player0;
 
         CardsPanel player1 = new CardsPanel(Uno.getPlayerCards(1), false);
-        player1.setRotation(90);
+        player1.setAngle(90);
         add(player1, BorderLayout.WEST);
         cardsPanel[1] = player1;
 
@@ -44,6 +44,7 @@ public class GameWindow extends JFrame {
 
         CardsPanel player3 = new CardsPanel(Uno.getPlayerCards(3), false);
         add(player3, BorderLayout.EAST);
+        player3.setAngle(-90);
         cardsPanel[3] = player3;
 
         placedCards = new PlacedCards();

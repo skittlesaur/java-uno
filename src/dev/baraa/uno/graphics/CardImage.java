@@ -7,13 +7,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 public class CardImage extends JPanel {
 
     private Card card;
     private boolean visible;
-    private int rotation;
+    private int angle;
 
     public CardImage(Card card, boolean visible) {
         this.card = card;
@@ -61,10 +62,38 @@ public class CardImage extends JPanel {
         String cardName = visible ? card.getCardName() : "Default";
         BufferedImage cardImage = ImageProvider.getCard(cardName);
 
+        cardImage = rotateImageByDegrees(cardImage, angle);
+
         graphics2D.drawImage(cardImage, 0, 0, getWidth(), getHeight(), this);
     }
 
-    public void setRotation(int rotation) {
-        this.rotation = rotation;
+    public BufferedImage rotateImageByDegrees(BufferedImage img, double angle) {
+
+        double rads = Math.toRadians(angle);
+        double sin = Math.abs(Math.sin(rads)), cos = Math.abs(Math.cos(rads));
+        int w = img.getWidth();
+        int h = img.getHeight();
+        int newWidth = (int) Math.floor(w * cos + h * sin);
+        int newHeight = (int) Math.floor(h * cos + w * sin);
+
+        BufferedImage rotated = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = rotated.createGraphics();
+        AffineTransform at = new AffineTransform();
+        at.translate((newWidth - w) / 2, (newHeight - h) / 2);
+
+        int x = w / 2;
+        int y = h / 2;
+
+        at.rotate(rads, x, y);
+        g2d.setTransform(at);
+        g2d.drawImage(img, 0, 0, this);
+        g2d.dispose();
+
+        return rotated;
+    }
+
+
+    public void setAngle(int angle) {
+        this.angle = angle;
     }
 }

@@ -10,6 +10,7 @@ public class CardsPanel extends JPanel {
 
     private final List<Card> cards;
     private final boolean visible;
+    private int angle;
 
     public CardsPanel(List<Card> cards, boolean visible) {
         this.cards = cards;
@@ -22,8 +23,9 @@ public class CardsPanel extends JPanel {
         update();
     }
 
-    public void setRotation(int rotation) {
-
+    public void setAngle(int angle) {
+        this.angle = angle;
+        update();
     }
 
 
@@ -32,6 +34,7 @@ public class CardsPanel extends JPanel {
 
         for (Card card : cards) {
             CardImage cardDisplay = new CardImage(card, visible);
+            cardDisplay.setAngle(angle);
             add(cardDisplay);
         }
 
