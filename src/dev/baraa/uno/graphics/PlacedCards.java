@@ -15,10 +15,6 @@ public class PlacedCards extends JLayeredPane {
 
     public PlacedCards() {
         cards = new ArrayList<>();
-        setOpaque(true);
-        setBackground(Color.BLACK);
-        //setLayout(new BorderLayout());
-        setLayout(new FlowLayout());
     }
 
     public void update(Card card) {
@@ -37,8 +33,8 @@ public class PlacedCards extends JLayeredPane {
         removeAll();
 
         for (int i = 0; i < cards.size(); i++) {
-            //addImpl(cards.get(i), BorderLayout.EAST, new Integer(i));
-            add(cards.get(i));
+            cards.get(i).setBounds(this.getWidth() / 2 - 100, this.getHeight() / 2 - 100, 200, 200);
+            add(cards.get(i), Integer.valueOf(i));
         }
 
         repaint();
