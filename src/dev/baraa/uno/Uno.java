@@ -68,4 +68,8 @@ public class Uno {
         }
         return null;
     }
+
+    public static Card getLastPlayedCard() {
+        return game.getLastPlayedCard();
+    }
 }

@@ -7,6 +7,7 @@ public abstract class TablePlayer {
     private ArrayList<Card> cards;
     private boolean localPlayer;
     private boolean uno;
+    private boolean playerTurn;
 
     public TablePlayer(boolean localPlayer) {
         this();
@@ -47,5 +48,13 @@ public abstract class TablePlayer {
         if (uno)
             System.out.println(this + " UNO!");
         this.uno = uno;
+    }
+
+    public boolean isPlayerTurn() {
+        return playerTurn;
+    }
+
+    public void setPlayerTurn(boolean playerTurn) {
+        this.playerTurn = playerTurn;
     }
 }

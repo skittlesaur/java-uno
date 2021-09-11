@@ -16,6 +16,8 @@ public class CardImage extends JPanel {
     private final boolean visible;
     private int angle;
 
+    private boolean locked;
+
     public CardImage(Card card, boolean visible) {
         this.card = card;
         this.visible = visible;
@@ -65,6 +67,11 @@ public class CardImage extends JPanel {
         cardImage = rotateImageByDegrees(cardImage, angle);
 
         graphics2D.drawImage(cardImage, 0, 0, getWidth() - cardImage.getWidth() / getWidth() - cardImage.getHeight() / getHeight(), getHeight(), this);
+
+        if (locked) {
+            graphics2D.setColor(new Color(0xCD181818, true));
+            graphics2D.fillRoundRect(0, 0, getWidth(), getHeight(), 5, 5);
+        }
     }
 
     public BufferedImage rotateImageByDegrees(BufferedImage img, double angle) {
@@ -95,5 +102,17 @@ public class CardImage extends JPanel {
 
     public void setAngle(int angle) {
         this.angle = angle;
+    }
+
+    public void setPlayable() {
+        locked = false;
+        repaint();
+        revalidate();
+    }
+
+    public void setHidden() {
+        locked = true;
+        repaint();
+        revalidate();
     }
 }

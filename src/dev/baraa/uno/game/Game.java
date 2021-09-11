@@ -37,7 +37,7 @@ public class Game {
             lastPlayedCard = getCard();
         while (lastPlayedCard.isSpecial());
 
-        // turn = new Random().nextInt(4);
+        gamePlayers[turn].setPlayerTurn(true);
     }
 
     public Card getCard() {
@@ -80,12 +80,11 @@ public class Game {
                     throw new IllegalCardException(card, lastPlayedCard);
         }
 
-        //TODO: remove this
-        if (card.getColor() == CardColor.UNIVERSAL)
-            card.setColor(CardColor.RED);
-
+        player.setPlayerTurn(false);
         player.removeCard(card);
         lastPlayedCard = card;
+
+        gamePlayers[getNextTurn()].setPlayerTurn(true);
 
         if (player.getCards().size() == 1 && !player.isUno())
             unoPenalty(player);

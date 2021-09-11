@@ -1,5 +1,6 @@
 package dev.baraa.uno.graphics;
 
+import dev.baraa.uno.Uno;
 import dev.baraa.uno.game.Card;
 
 import javax.swing.*;
@@ -41,6 +42,18 @@ public class CardsPanel extends JPanel {
         for (Card card : cards) {
             CardImage cardDisplay = new CardImage(card, visible);
             cardDisplay.setAngle(angle);
+
+            if (card.getHolder().isLocalPlayer()) {
+                if (card.getHolder().isPlayerTurn()
+                        && card.isPlayable(Uno.getLastPlayedCard())) {
+                    System.out.println(1);
+                    cardDisplay.setPlayable();
+                } else {
+                    System.out.println(2);
+                    cardDisplay.setHidden();
+                }
+            }
+
             add(cardDisplay);
         }
 
