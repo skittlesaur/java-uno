@@ -5,9 +5,9 @@ import dev.baraa.uno.exceptions.game.IllegalCardException;
 import dev.baraa.uno.exceptions.graphics.GameWindowHasBeenInitializedException;
 import dev.baraa.uno.exceptions.graphics.GameWindowNotInitializedException;
 import dev.baraa.uno.exceptions.graphics.GraphicsException;
-import dev.baraa.uno.game.Card;
-import dev.baraa.uno.game.Game;
-import dev.baraa.uno.game.TablePlayer;
+import dev.baraa.uno.game.*;
+import dev.baraa.uno.graphics.ColorEvent;
+import dev.baraa.uno.graphics.ColorPicker;
 import dev.baraa.uno.graphics.GameWindow;
 import dev.baraa.uno.graphics.ImageProvider;
 
@@ -39,6 +39,14 @@ public class Uno {
     }
 
     public static void play(TablePlayer player, Card card) {
+
+        if (card.getColor() == CardColor.UNIVERSAL) {
+            ColorPicker colorPicker = new ColorPicker();
+            colorPicker.setColorEvent(cardColor -> {
+                card.setColor(cardColor);
+            });
+            colorPicker.display();
+        }
 
         try {
             game.play(player, card);
