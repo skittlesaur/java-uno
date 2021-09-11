@@ -36,9 +36,6 @@ public class Game {
             lastPlayedCard = getCard();
         while (lastPlayedCard.isSpecial());
 
-        gamePlayers[0].addCard(new Card(10));
-        gamePlayers[0].addCard(new Card(12));
-
         gamePlayers[turn].setPlayerTurn(true);
     }
 
@@ -87,10 +84,11 @@ public class Game {
         lastPlayedCard = card;
 
         if (player.getCards().size() == 1 && !player.isUno())
-            unoPenalty(player);
+            //unoPenalty(player);
+            player.setUno(true);
 
         if (player.getCards().size() == 0) {
-            System.out.println("WINNER " + player);
+            Uno.endGame(player);
         }
 
         if (player.getCards().size() > 1)
@@ -186,4 +184,7 @@ public class Game {
         return lastPlayedCard;
     }
 
+    public Player getPlayer() {
+        return player;
+    }
 }

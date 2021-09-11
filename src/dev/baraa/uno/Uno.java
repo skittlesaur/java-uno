@@ -72,4 +72,17 @@ public class Uno {
     public static Card getLastPlayedCard() {
         return game.getLastPlayedCard();
     }
+
+    public static void endGame(TablePlayer winner) {
+        System.out.println(winner + " WON!");
+        System.exit(1);
+    }
+
+    public static void drawCard() {
+        Player player = game.getPlayer();
+        Card card = drawCard(player);
+        player.addCard(card);
+        GameWindow.updateCards();
+        game.nextTurn();
+    }
 }

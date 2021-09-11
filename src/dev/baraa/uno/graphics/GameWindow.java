@@ -58,6 +58,7 @@ public class GameWindow extends JFrame {
          * This is how the game is played by default. The player can modify this in the settings at any time.
          */
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
 

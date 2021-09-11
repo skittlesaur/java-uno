@@ -30,8 +30,12 @@ public class CardImage extends JPanel {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (card.getHolder() == null)
+                //TODO: remove this
+                if (card.getHolder() == null) {
+                    System.out.println(1);
+                    Uno.drawCard();
                     return;
+                }
                 if (card.getHolder().isLocalPlayer()) {
                     Uno.play(card.getHolder(), card);
                 }
