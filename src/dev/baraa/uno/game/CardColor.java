@@ -20,10 +20,10 @@ public enum CardColor {
 
     public Color getColor() {
         return switch (this) {
-            case YELLOW -> new Color(0xffb703);
-            case RED -> new Color(0xCB1616);
-            case GREEN -> new Color(0x7FEF1E);
-            case BLUE -> new Color(0x1DC4EE);
+            case YELLOW -> new Color(0xF7E463);
+            case RED -> new Color(0xF56462);
+            case GREEN -> new Color(0x54E5AB);
+            case BLUE -> new Color(0x00C3E5);
             default -> throw new IllegalStateException("Unexpected value: " + this);
         };
     }

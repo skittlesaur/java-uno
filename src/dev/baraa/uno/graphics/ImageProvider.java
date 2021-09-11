@@ -44,8 +44,8 @@ public class ImageProvider {
             cards.put("10" + color, readCardImage(color.toLowerCase() + "_picker"));
             cards.put("11" + color, readCardImage(color.toLowerCase() + "_skip"));
             cards.put("12" + color, readCardImage(color.toLowerCase() + "_reverse"));
-            cards.put("13" + color, readCardImage("wild_color_changer"));
-            cards.put("14" + color, readCardImage("wild_pick_four"));
+            cards.put("13" + color, readCardImage("wild_color_changer_" + color.toLowerCase()));
+            cards.put("14" + color, readCardImage("wild_pick_four_" + color.toLowerCase()));
         }
     }
 
