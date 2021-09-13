@@ -25,7 +25,7 @@ public class GameWindow extends JFrame {
     private GameWindow() {
         setMinimumSize(new Dimension(1000, 700));
         setLocationRelativeTo(null);
-        //setUndecorated(true);
+        setUndecorated(true);
 
         JPanel gameAction = new JPanel();
         gameAction.setOpaque(false);
@@ -37,7 +37,7 @@ public class GameWindow extends JFrame {
         gameAction.add(player0, BorderLayout.SOUTH);
         cardsPanel[0] = player0;
 
-        CardsPanel player2 = new CardsPanel(Uno.getPlayerCards(1), true);
+        CardsPanel player2 = new CardsPanel(Uno.getPlayerCards(1), false);
         gameAction.add(player2, BorderLayout.NORTH);
         cardsPanel[1] = player2;
 
