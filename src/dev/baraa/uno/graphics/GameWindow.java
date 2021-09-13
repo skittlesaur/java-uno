@@ -15,13 +15,21 @@ public class GameWindow extends JFrame {
     /**
      * Stores the previous size and previous location of the window.
      * Whenever the user goes to windowed mode, this will be accessed to position and size the window to the preferred user size and position.
+     * <p>
+     * This is still being worked on.
      */
-    private Dimension prevSize;
-    private Point prevLocation;
 
-    private CardsPanel[] cardsPanel;
-    private PlacedCards placedCards;
+    //TODO:
+    // private Dimension prevSize;
+    // private Point prevLocation;
 
+    private final CardsPanel[] cardsPanel;
+    private final PlacedCards placedCards;
+
+    /**
+     * Creates the main game window.
+     * Used to display the actual game events and control player's turns.
+     */
     private GameWindow() {
         setMinimumSize(new Dimension(1000, 700));
         setLocationRelativeTo(null);
@@ -50,8 +58,9 @@ public class GameWindow extends JFrame {
          * Initializes the previous size and previous location.
          */
         pack();
-        prevSize = getSize();
-        prevLocation = getLocation();
+        //TODO:
+        // prevSize = getSize();
+        // prevLocation = getLocation();
 
         /*
          * Sets the JFrame to be maximized.
@@ -86,12 +95,21 @@ public class GameWindow extends JFrame {
         gameWindow.setVisible(true);
     }
 
+    /**
+     * Updates the card count and actual cards the players are holding.
+     * This is usually called after every move so those updates can happen when a player plays/draws a card.
+     */
     public static void updateCards() {
         for (CardsPanel cardsPanel : gameWindow.cardsPanel) {
             cardsPanel.update();
         }
     }
 
+    /**
+     * Adds a card to the top of the table.
+     *
+     * @param card The last played card
+     */
     public static void updateTable(Card card) {
         gameWindow.placedCards.update(card);
     }
