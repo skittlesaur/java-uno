@@ -44,7 +44,7 @@ public class Game {
         return new Card(randomValue);
     }
 
-    public ArrayList getPlayerCards(int playerIndex) {
+    public ArrayList<Card> getPlayerCards(int playerIndex) {
         return gamePlayers[playerIndex].getCards();
     }
 
@@ -93,26 +93,26 @@ public class Game {
             player.setUno(false);
 
 
-        if (lastPlayedCard.isSpecial()) {
-            if (lastPlayedCard.getSpecialMove() == SpecialMove.SKIP) {
-                changeVal = 2;
-            } else if (lastPlayedCard.getSpecialMove() == SpecialMove.REVERSE) {
-                direction *= -1;
-            } else if (lastPlayedCard.getSpecialMove() == SpecialMove.PLUS_TWO) {
-                changeVal = 1;
-                TablePlayer affectedPlayer = gamePlayers[getNextTurn()];
-                System.out.println(affectedPlayer);
-                plusCards(affectedPlayer, 2);
-                changeVal = 2;
-            } else if (lastPlayedCard.getSpecialMove() == SpecialMove.PLUS_FOUR) {
-                changeVal = 1;
-                TablePlayer affectedPlayer = gamePlayers[getNextTurn()];
-                plusCards(affectedPlayer, 4);
-                changeVal = 2;
+        if (lastPlayedCard.isSpecial())
+            switch (lastPlayedCard.getSpecialMove()) {
+                case SKIP -> changeVal = 2;
+                case REVERSE -> direction *= -1;
+                case PLUS_TWO -> {
+                    changeVal = 1;
+                    TablePlayer affectedPlayer = gamePlayers[getNextTurn()];
+                    plusCards(affectedPlayer, 2);
+                    changeVal = 2;
+                }
+                case CHANGE_COLOR -> changeVal = 1;
+                case PLUS_FOUR -> {
+                    changeVal = 1;
+                    TablePlayer affectedPlayer = gamePlayers[getNextTurn()];
+                    plusCards(affectedPlayer, 4);
+                    changeVal = 2;
+                }
             }
-        } else {
+        else
             changeVal = 1;
-        }
     }
 
     private void unoPenalty(TablePlayer player) {
