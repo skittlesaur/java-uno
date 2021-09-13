@@ -149,7 +149,7 @@ public class Game {
             if (botCard != null)
                 Uno.play(currentPlayer, botCard);
             else
-                nextTurn();
+                skipTurn();
         });
         timer.setRepeats(false);
         timer.start();
@@ -186,5 +186,10 @@ public class Game {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public void skipTurn() {
+        changeVal = 1;
+        nextTurn();
     }
 }

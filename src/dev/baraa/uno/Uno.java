@@ -88,18 +88,18 @@ public class Uno {
         if (card.isPlayable(game.getLastPlayedCard())) {
             PlayableDrawnCard playableDrawnCard = new PlayableDrawnCard(card);
             playableDrawnCard.setPlayableCardEvent(option -> {
-                switch (option) {
-                    case PLAY -> play(player, card);
-                    case KEEP -> player.addCard(card);
+                if (option == CardOptions.PLAY) {
+                    play(player, card);
+                    playableDrawnCard.dispose();
+                    return;
                 }
                 playableDrawnCard.dispose();
             });
             playableDrawnCard.setActive();
-        } else {
-            player.addCard(card);
         }
 
+        player.addCard(card);
         GameWindow.updateCards();
-        game.nextTurn();
+        game.skipTurn();
     }
 }
