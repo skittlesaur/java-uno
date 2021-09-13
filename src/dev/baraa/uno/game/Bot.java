@@ -28,6 +28,7 @@ public class Bot extends TablePlayer {
 
         if (possibleCards.size() == 0) {
             Card draw = Uno.drawCard(this);
+            System.out.println(draw);
             addCard(draw);
 
             if (draw.isPlayable(lastPlayedCard)) {

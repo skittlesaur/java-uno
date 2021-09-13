@@ -23,7 +23,7 @@ public class GameWindow extends JFrame {
     private PlacedCards placedCards;
 
     private GameWindow() {
-        setMinimumSize(new Dimension(700, 600));
+        setMinimumSize(new Dimension(1000, 700));
         setLocationRelativeTo(null);
         //setUndecorated(true);
 

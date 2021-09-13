@@ -124,8 +124,8 @@ public class Game {
     }
 
     public void nextTurn() {
-
         turn = getNextTurn();
+        System.out.println(turn);
         TablePlayer currentPlayer = gamePlayers[turn];
 
         if (currentPlayer instanceof Bot) {
@@ -162,7 +162,6 @@ public class Game {
     }
 
     public Card drawCard(TablePlayer player) throws PlayerTurnException {
-
         if (getIndex(player) != turn)
             throw new PlayerTurnException();
 
