@@ -46,8 +46,6 @@ public abstract class TablePlayer {
     }
 
     public void setUno(boolean uno) {
-        if (uno)
-            System.out.println(this + " UNO!");
         this.uno = uno;
     }
 

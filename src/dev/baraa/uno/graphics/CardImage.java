@@ -32,7 +32,6 @@ public class CardImage extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 //TODO: remove this
                 if (card.getHolder() == null) {
-                    System.out.println(1);
                     Uno.drawCard();
                     return;
                 }

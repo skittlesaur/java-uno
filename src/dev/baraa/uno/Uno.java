@@ -36,7 +36,6 @@ public class Uno {
     }
 
     public static void play(TablePlayer player, Card card) {
-
         if (card.getColor() == CardColor.UNIVERSAL) {
             ColorPicker colorPicker = new ColorPicker();
             colorPicker.setColorEvent(cardColor -> {
@@ -44,8 +43,6 @@ public class Uno {
             });
             colorPicker.display();
         }
-
-        System.out.println(player + " PLAYED " + card);
 
         try {
             game.play(player, card);
@@ -61,7 +58,6 @@ public class Uno {
     }
 
     public static Card drawCard(TablePlayer player) {
-        System.out.println("DRAW: " + player);
         try {
             return game.drawCard(player);
         } catch (PlayerTurnException e) {
@@ -89,19 +85,22 @@ public class Uno {
         if (card.isPlayable(game.getLastPlayedCard())) {
             PlayableDrawnCard playableDrawnCard = new PlayableDrawnCard(card);
             playableDrawnCard.setPlayableCardEvent(option -> {
+                playableDrawnCard.dispose();
+
                 if (option == CardOptions.PLAY) {
                     play(player, card);
-                    playableDrawnCard.dispose();
-                    return;
+                } else {
+                    player.addCard(card);
+                    GameWindow.updateCards();
+                    game.skipTurn();
                 }
-                playableDrawnCard.dispose();
             });
             playableDrawnCard.setActive();
+        } else {
+            player.addCard(card);
+            GameWindow.updateCards();
+            game.skipTurn();
         }
-
-        player.addCard(card);
-        GameWindow.updateCards();
-        game.skipTurn();
     }
 
     public static void updateCards() {
