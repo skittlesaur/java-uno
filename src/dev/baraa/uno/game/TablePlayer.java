@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public abstract class TablePlayer {
 
-    private ArrayList<Card> cards;
+    private final ArrayList<Card> cards;
     private boolean localPlayer;
     private boolean uno;
     private boolean playerTurn;
@@ -35,10 +35,6 @@ public abstract class TablePlayer {
 
     public boolean isLocalPlayer() {
         return localPlayer;
-    }
-
-    public void setLocalPlayer(boolean localPlayer) {
-        this.localPlayer = localPlayer;
     }
 
     public boolean isUno() {

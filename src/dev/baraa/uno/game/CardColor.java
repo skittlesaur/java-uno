@@ -1,7 +1,5 @@
 package dev.baraa.uno.game;
 
-import dev.baraa.uno.graphics.ColorPicker;
-
 import java.awt.*;
 import java.util.Random;
 
@@ -18,6 +16,9 @@ public enum CardColor {
         return cardColors[randomValue];
     }
 
+    /**
+     * @return the Color object of each color.
+     */
     public Color getColor() {
         return switch (this) {
             case YELLOW -> new Color(0xF7E463);
@@ -25,16 +26,6 @@ public enum CardColor {
             case GREEN -> new Color(0x54E5AB);
             case BLUE -> new Color(0x00C3E5);
             default -> throw new IllegalStateException("Unexpected value: " + this);
-        };
-    }
-
-    public int getIndex() {
-        return switch (this) {
-            case YELLOW -> 1;
-            case RED -> 2;
-            case GREEN -> 3;
-            case BLUE -> 4;
-            case UNIVERSAL -> 0;
         };
     }
 }

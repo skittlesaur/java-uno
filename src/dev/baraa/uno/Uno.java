@@ -11,8 +11,15 @@ import dev.baraa.uno.graphics.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * The Uno class is the main class in this project, and it contains the main method as well as acting as the controller.
+ * This class connects the project's back-end to its front-end. Filling the role of a Model-Controller.
+ */
 public class Uno {
 
+    /**
+     * Current active game
+     */
     private static Game game;
 
     public static void main(String[] args) throws GraphicsException, IOException {

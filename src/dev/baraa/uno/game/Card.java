@@ -30,22 +30,16 @@ public class Card {
         }
     }
 
-    public boolean isPlayable(Card topCard) {
-        if (value == topCard.getValue()
-                || color == topCard.getColor()
-                || color == CardColor.UNIVERSAL)
-            return true;
-        return false;
-    }
-
     /**
-     * Sets the card to be special.
+     * Checks if the selected card can be placed on top of the other card.
      *
-     * @param value card value
+     * @param anotherCard The card to be placed on
+     * @return True if the selected card is playable and false otherwise.
      */
-    private void setSpecial(int value) {
-        this.special = true;
-        this.specialMove = SpecialMove.getSpecialMove(value);
+    public boolean isPlayable(Card anotherCard) {
+        return value == anotherCard.getValue()
+                || color == anotherCard.getColor()
+                || color == CardColor.UNIVERSAL;
     }
 
     public int getValue() {
@@ -54,6 +48,10 @@ public class Card {
 
     public CardColor getColor() {
         return color;
+    }
+
+    public void setColor(CardColor color) {
+        this.color = color;
     }
 
     public String getCardName() {
@@ -68,6 +66,19 @@ public class Card {
         this.holder = holder;
     }
 
+    public SpecialMove getSpecialMove() {
+        return specialMove;
+    }
+
+    private void setSpecial(int value) {
+        this.special = true;
+        this.specialMove = SpecialMove.getSpecialMove(value);
+    }
+
+    public boolean isSpecial() {
+        return special;
+    }
+
     @Override
     public String toString() {
         return "Card{" +
@@ -75,17 +86,5 @@ public class Card {
                 ", color=" + color +
                 ", specialMove=" + specialMove +
                 '}';
-    }
-
-    public boolean isSpecial() {
-        return special;
-    }
-
-    public SpecialMove getSpecialMove() {
-        return specialMove;
-    }
-
-    public void setColor(CardColor color) {
-        this.color = color;
     }
 }
