@@ -8,6 +8,7 @@ public abstract class TablePlayer {
     private boolean localPlayer;
     private boolean uno;
     private boolean playerTurn;
+    private String name;
 
     public TablePlayer(boolean localPlayer) {
         this();
@@ -56,5 +57,14 @@ public abstract class TablePlayer {
 
     public void setPlayerTurn(boolean playerTurn) {
         this.playerTurn = playerTurn;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

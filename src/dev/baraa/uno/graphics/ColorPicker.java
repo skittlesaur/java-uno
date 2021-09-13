@@ -19,7 +19,6 @@ public class ColorPicker extends JDialog {
 
         JPanel colorsPanel = new JPanel();
         colorsPanel.setOpaque(false);
-        colorsPanel.setBackground(new Color(0));
         colorsPanel.setLayout(new BorderLayout());
 
         JLabel title = new JLabel("CHOOSE A COLOR", SwingConstants.CENTER);

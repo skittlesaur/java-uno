@@ -2,9 +2,6 @@ package dev.baraa.uno.game;
 
 import dev.baraa.uno.Uno;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -12,18 +9,17 @@ import java.util.Random;
 public class Bot extends TablePlayer {
 
     private static int botCount;
-    private final String botName;
 
     public Bot() {
         botCount++;
-        botName = "Bot" + botCount;
+        setName("Bot" + botCount);
     }
 
     public Card play(Card lastPlayedCard) {
         List<Card> possibleCards = new ArrayList<>();
 
         /*
-          gets the possible cards to play
+          gets all possible cards to play
          */
         for (Card card : getCards()) {
             if (card.isPlayable(lastPlayedCard))
@@ -91,7 +87,6 @@ public class Bot extends TablePlayer {
             }
         }
 
-        System.out.println(bestColor);
         return bestColor;
     }
 }

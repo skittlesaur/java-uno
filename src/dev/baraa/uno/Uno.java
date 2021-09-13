@@ -6,10 +6,7 @@ import dev.baraa.uno.exceptions.graphics.GameWindowHasBeenInitializedException;
 import dev.baraa.uno.exceptions.graphics.GameWindowNotInitializedException;
 import dev.baraa.uno.exceptions.graphics.GraphicsException;
 import dev.baraa.uno.game.*;
-import dev.baraa.uno.graphics.ColorEvent;
-import dev.baraa.uno.graphics.ColorPicker;
-import dev.baraa.uno.graphics.GameWindow;
-import dev.baraa.uno.graphics.ImageProvider;
+import dev.baraa.uno.graphics.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -48,6 +45,8 @@ public class Uno {
             colorPicker.display();
         }
 
+        System.out.println(player + " PLAYED " + card);
+
         try {
             game.play(player, card);
             GameWindow.updateCards();
@@ -61,6 +60,7 @@ public class Uno {
     }
 
     public static Card drawCard(TablePlayer player) {
+        System.out.println("DRAW: " + player);
         try {
             return game.drawCard(player);
         } catch (PlayerTurnException e) {
@@ -80,8 +80,25 @@ public class Uno {
 
     public static void drawCard() {
         Player player = game.getPlayer();
+
         Card card = drawCard(player);
-        player.addCard(card);
+        if (card == null)
+            return;
+
+        if (card.isPlayable(game.getLastPlayedCard())) {
+            PlayableDrawnCard playableDrawnCard = new PlayableDrawnCard(card);
+            playableDrawnCard.setPlayableCardEvent(option -> {
+                switch (option) {
+                    case PLAY -> play(player, card);
+                    case KEEP -> player.addCard(card);
+                }
+                playableDrawnCard.dispose();
+            });
+            playableDrawnCard.setActive();
+        } else {
+            player.addCard(card);
+        }
+
         GameWindow.updateCards();
         game.nextTurn();
     }
