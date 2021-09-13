@@ -49,6 +49,7 @@ public class Uno {
 
         try {
             game.play(player, card);
+            game.updateTurn();
             GameWindow.updateCards();
             GameWindow.updateTable(card);
             game.nextTurn();
@@ -101,5 +102,9 @@ public class Uno {
         player.addCard(card);
         GameWindow.updateCards();
         game.skipTurn();
+    }
+
+    public static void updateCards() {
+        GameWindow.updateCards();
     }
 }

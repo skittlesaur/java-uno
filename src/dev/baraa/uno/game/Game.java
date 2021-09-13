@@ -6,7 +6,6 @@ import dev.baraa.uno.exceptions.game.IllegalCardException;
 
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Random;
 
 public class Game {
@@ -54,7 +53,7 @@ public class Game {
         /*
           If not the player turn, throw an exception.
          */
-        if (getIndex(player) != turn)
+        if (!player.isPlayerTurn())
             throw new PlayerTurnException();
 
 
@@ -79,7 +78,6 @@ public class Game {
                     throw new IllegalCardException(card, lastPlayedCard);
         }
 
-        player.setPlayerTurn(false);
         player.removeCard(card);
         lastPlayedCard = card;
 
@@ -115,17 +113,19 @@ public class Game {
         } else {
             changeVal = 1;
         }
-
-        gamePlayers[getNextTurn()].setPlayerTurn(true);
     }
 
     private void unoPenalty(TablePlayer player) {
         plusCards(player, 2);
     }
 
-    public void nextTurn() {
+    public void updateTurn() {
+        gamePlayers[turn].setPlayerTurn(false);
         turn = getNextTurn();
-        System.out.println(turn);
+        gamePlayers[turn].setPlayerTurn(true);
+    }
+
+    public void nextTurn() {
         TablePlayer currentPlayer = gamePlayers[turn];
 
         if (currentPlayer instanceof Bot) {
@@ -189,6 +189,8 @@ public class Game {
 
     public void skipTurn() {
         changeVal = 1;
+        updateTurn();
+        Uno.updateCards();
         nextTurn();
     }
 }
