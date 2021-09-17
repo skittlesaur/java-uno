@@ -135,9 +135,7 @@ public class Game {
 
     private int getNextTurn() {
         int val = (turn + changeVal * direction) % gamePlayers.length;
-        if (val < 0)
-            val = gamePlayers.length + val;
-        return val;
+        return Math.abs(val);
     }
 
     private void botTurn(TablePlayer currentPlayer) {
@@ -192,5 +190,13 @@ public class Game {
         updateTurn();
         Uno.updateCards();
         nextTurn();
+    }
+
+    public int getTurn() {
+        return turn;
+    }
+
+    public TablePlayer[] getGamePlayers() {
+        return gamePlayers;
     }
 }
